@@ -1,0 +1,46 @@
+---
+const links = [
+  { href: "/",         label: "Home" },
+  { href: "/projects", label: "Projects" },
+  { href: "/contact",  label: "Contact" },
+];
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) => {
+  const normalized = href.replace(/\/$/, "") || "/";
+  return path === normalized;
+};
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-outline-variant/30 bg-background/80 backdrop-blur-xl">
+  <div class="mx-auto max-w-7xl px-8 h-16 flex items-center justify-between">
+    <a href="/" class="font-display font-semibold text-lg text-primary-container hover:brightness-110 transition">
+      Moe Htet Kyaw
+    </a>
+
+    <ul class="hidden md:flex items-center gap-10">
+      {links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            class:list={[
+              "text-sm transition-colors pb-1",
+              isActive(l.href)
+                ? "text-primary-container border-b-2 border-primary-container"
+                : "text-on-surface-variant hover:text-primary-container",
+            ]}
+          >
+            {l.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a
+      href="/resume.pdf"
+      class="inline-flex items-center px-5 py-2 rounded bg-primary-container text-on-primary text-sm font-medium hover:glow-primary-strong hover:brightness-110 transition-all"
+    >
+      Resume
+    </a>
+  </div>
+</nav>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  class?: string;
+  as?: string;
+  glow?: boolean;
+  rounded?: "sm" | "md" | "lg" | "xl";
+}
+
+const { class: className = "", as: Tag = "div", glow = false, rounded = "md" } = Astro.props;
+
+const radiusMap = {
+  sm: "rounded-sm",
+  md: "rounded-md",
+  lg: "rounded-lg",
+  xl: "rounded-xl",
+};
+---
+
+<Tag class={`glass ${radiusMap[rounded]} ${glow ? "glow-primary" : ""} ${className}`}>
+  <slot />
+</Tag>

@@ -1,0 +1,74 @@
+---
+// Hero — with scroll-reveal, typing animation, and float on avatar
+---
+
+<section id="about" class="relative px-8 pt-32 pb-24 overflow-hidden">
+  <!-- Blueprint grid -->
+  <div
+    class="absolute inset-0 -z-10 opacity-[0.04] pointer-events-none"
+    style="background-image: linear-gradient(rgba(0, 209, 255, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 209, 255, 0.5) 1px, transparent 1px); background-size: 56px 56px;"
+  ></div>
+
+  <div class="mx-auto max-w-7xl grid md:grid-cols-12 gap-10 items-center">
+    <div class="md:col-span-7 lg:col-span-8 space-y-6">
+
+      <!-- IDENTITY label — glitch effect here -->
+      <div class="flex items-center gap-2 text-primary-container glitch" data-reveal>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>
+        </svg>
+        <span class="mono-label">IDENTITY.PROFILE&nbsp;&nbsp;//&nbsp;&nbsp;VERIFIED</span>
+      </div>
+
+      <!-- Headline — "Hi, I am" static, name types out -->
+      <h1
+        class="font-display font-bold text-on-surface leading-[1.05] tracking-tight text-5xl md:text-6xl"
+        data-reveal data-delay="1"
+      >
+        Hi, I am
+        <br />
+        <span id="hero-name" class="text-primary-container" data-typeout="Moe Htet Kyaw."></span><span id="hero-name-cursor" class="inline-block w-[3px] h-[0.85em] align-middle bg-primary-container ml-0.5 animate-pulse"></span>
+      </h1>
+
+      <!-- Bio -->
+      <p class="text-body-lg text-on-surface-variant max-w-2xl leading-relaxed" data-reveal data-delay="2">
+        Cybersecurity graduate from Monash University with hands-on experience in network security, authentication systems, and Linux-based infrastructure. Built and deployed multiple home-lab security projects including NAS infrastructure, automated vulnerability scanning tools, and RFID security testing environments. Experienced working in Agile teams and implementing secure authentication, encryption, and role-based access control in real-world applications. Seeking an entry-level role in cybersecurity, security engineering, or backend development.
+      </p>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-wrap gap-4 pt-2" data-reveal data-delay="3">
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded bg-primary-container text-on-primary text-sm font-medium hover:glow-primary-strong hover:brightness-110 transition-all duration-300"
+        >
+          View Projects
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded border border-primary-container text-primary-container text-sm font-medium hover:bg-primary-container/10 hover:glow-primary transition-all duration-300"
+        >
+          Get in Touch
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Avatar card -->
+    <aside class="md:col-span-5 lg:col-span-4 flex justify-center md:justify-end" data-reveal data-delay="2">
+      <div class="relative w-full max-w-[340px] aspect-square float">
+        <div class="glass rounded-md w-full h-full flex items-center justify-center tilt" style="background-color: rgba(0, 95, 130, 0.18);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-container/70" aria-hidden="true">
+            <circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>
+          </svg>
+        </div>
+
+        <!-- AVAILABLE FOR HIRE badge -->
+        <div class="absolute -bottom-3 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded bg-surface-container-high border border-outline-variant/50 backdrop-blur">
+          <span class="block h-1.5 w-1.5 rounded-full bg-secondary-container pulse-secure"></span>
+          <span class="mono-label text-on-surface text-[11px]">AVAILABLE FOR HIRE</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>

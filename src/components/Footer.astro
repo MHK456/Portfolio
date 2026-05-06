@@ -1,0 +1,36 @@
+---
+const links = [
+  { label: "GITHUB", href: "https://github.com/MHK456", target: "_blank" },
+  {
+    label: "LINKEDIN",
+    href: "https://www.linkedin.com/in/moekyaw",
+    target: "_blank",
+  },
+];
+---
+
+<footer class="px-8 py-6 border-t border-outline-variant/30 mt-12">
+  <div
+    class="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4"
+  >
+    <span class="mono-label text-on-surface-variant text-[11px]">
+      © PORTFOLIO - MOE HTET KYAW
+    </span>
+    <ul class="flex flex-wrap items-center gap-6">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              target={l.target}
+              rel="noopener noreferrer"
+              class="mono-label text-on-surface-variant text-[11px] hover:text-primary-container transition-colors"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

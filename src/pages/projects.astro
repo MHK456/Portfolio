@@ -1,0 +1,325 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Operations & Deployments — verbatim copy from the design.
+const operations = [
+  {
+    layout: "split",
+    span: 7,
+    image: "/images/nas-server.jpg",
+    tags: ["Raspberry Pi 5", "OpenMediaVault", "Linux (Debian)", "RAID", "Samba/NFS"],
+    category: { icon: "server", label: "INFRASTRUCTURE / CYBERSECURITY" },
+    title: "NAS Server Infrastructure – Raspberry Pi Home Lab",
+    bullets: [
+      "Designed and deployed a Network Attached Storage (NAS) system using Raspberry Pi and OpenMediaVault.",
+      "Configured secure file sharing protocols (SMB/CIFS and NFS) for cross-platform access across Windows, macOS, and Linux.",
+      "Implemented storage management and network-based data centralization within a home lab environment.",
+      "Developed hands-on experience with Linux server configuration and network storage architecture.",
+    ],
+  },
+  {
+    layout: "stacked",
+    span: 5,
+    image: "/images/webnovel-calc.jpg",
+    tags: ["JavaScript", "Google Analytics", "GitHub Pages"],
+    category: { icon: "code", label: "WEB DEV" },
+    title: "Webnovel Author Income Calculator",
+    bullets: [
+      { label: "Live Product Impact", text: "Developed and deployed a niche financial tool that achieved 600+ views and maintained a consistent user base of 100+ active users." },
+      { label: "Complex Financial Modeling", text: "Engineered custom algorithms to calculate multi-tier revenue streams, including subscription splits, milestone bonuses, and global currency conversions." },
+      { label: "Data-Driven Optimization", text: "Utilized Google Analytics to monitor user engagement and behavioral trends, iteratively refining the UI/UX based on real-world usage data." },
+    ],
+    cta: { label: "VIEW LIVE PROJECT", href: "https://mhk456.github.io/income-caculator-WN/", target: "_blank" },
+  },
+  {
+    layout: "stacked",
+    span: 7,
+    image: "/images/bjorn-scanner.jpg",
+    tags: ["Raspberry Pi Zero 2W", "e-Paper Interface", "Python", "Scapy", "Nmap", "Linux (Debian)"],
+    category: { icon: "shield", label: "CYBERSECURITY" },
+    title: "Bjorn: Portable Autonomous Network Security Auditor",
+    bullets: [
+      { label: "Software Debugging & Optimization", text: "Analyzed and refactored core Python scripts from an open-source framework to resolve local environment conflicts and broken dependencies." },
+      { label: "Vulnerability Assessment", text: "Configured automated scanning sequences using Nmap and Scapy to identify open ports, service versions, and potential entry points for security auditing." },
+    ],
+  },
+  {
+    layout: "split",
+    span: 5,
+    image: "/images/rfid-lab.jpg",
+    tags: ["Proxmark3 Easy", "Iceman Firmware"],
+    category: { icon: "shield", label: "CYBERSECURITY" },
+    title: "Physical Security: RFID & NFC Analysis Lab",
+    bullets: [
+      { label: "Tag Auditing & Cloning", text: "Performed successful identification, data dumping, and cloning of MIFARE Classic and HID Prox credentials to demonstrate vulnerabilities in legacy access control systems." },
+      { label: "Cryptographic Weakness Testing", text: "Utilized the Nested and Hardnested attack vectors to recover encrypted sectors and secret keys from MIFARE-based smart cards." },
+    ],
+  },
+];
+
+const teamProjects = [
+  {
+    tags: ["OAuth 2.0", "Stripe API", "SSL/TLS", "CakePHP", "Git", "Trello"],
+    category: { icon: "shield", label: "CYBERSECURITY / WEB DEV" },
+    title: "Monash IT Industry Experience: We Help Hospitality",
+    role: "Role: Cybersecurity Lead / Developer",
+    bullets: [
+      "Application Security",
+      "Data Encryption",
+      "Security-Focused Development",
+      "Identity Management",
+      "Secure Deployment",
+      "Collaborative Risk Management",
+    ],
+    cta: { label: "VIEW LIVE PROJECT", href: "https://www.wehelphospitality.com.au/", target: "_blank" },
+  },
+  {
+    tags: ["Stripe API", "RBAC", "PHP", "Git", "Trello", "Cal.com"],
+    date: "Mar 2026 - Apr 2026",
+    category: { icon: "shield", label: "CYBERSECURITY / WEB DEV" },
+    title: "Freelancer: GTD Hospitality",
+    role: "Role: Security Consultant & Full-Stack Developer",
+    bullets: [
+      "Client Requirements",
+      "Access Control Strategy",
+      "Production Lifecycle Management",
+    ],
+    cta: { label: "VIEW LIVE PROJECT", href: "https://gtd.com.au/", target: "_blank" },
+  },
+];
+
+const uniProjects = [
+  {
+    icon: "globe",
+    title: "Network Security (FIT3031)",
+    body: [
+      { heading: "Attack Simulation", text: "Implemented TCP/UDP scanning and executed Local/Remote DNS cache poisoning (Kaminsky attack) to analyse adversarial reconnaissance patterns." },
+      { heading: "Enterprise Architecture", text: "Designed and deployed a secure multi-campus network across three locations using GNS3, featuring perimeter firewalls and encrypted service tunnels." },
+      { heading: "Defense & Monitoring", text: "Configured Site-to-Site and Remote Access IPsec VPNs, BGP routing, and custom Snort IDS rules to detect and alert on unauthorized intrusion patterns." },
+      { heading: "Enterprise Architecture", text: "Designed and deployed a secure multi-campus network across three locations using GNS3, featuring perimeter firewalls and encrypted service tunnels." },
+      { heading: "Defense & Monitoring", text: "Configured Site-to-Site and Remote Access IPsec VPNs, BGP routing, and custom Snort IDS rules to detect and alert on unauthorized intrusion attempts." },
+    ],
+  },
+  {
+    icon: "key",
+    title: "IT Forensics (FIT3168)",
+    body: [
+      { heading: "Evidence Acquisition", text: "Utilized FTK Imager to perform bit-stream imaging and preserve data integrity through cryptographic hashing." },
+      { heading: "Artifact Analysis", text: "Conducted deep-dive investigations using Autopsy to recover deleted files, analyze registry hives, and reconstruct user activity from disk images." },
+      { heading: "Network & Memory Analysis", text: "Leveraged Wireshark for packet-level forensic inspection and performed volatile memory analysis to identify active malware or unauthorized processes." },
+      { heading: "Cryptographic Cracking", text: "Employed John the Ripper within Kali Linux to recover passwords and access protected evidence during controlled simulations." },
+    ],
+  },
+  {
+    icon: "bug",
+    title: "Software Security (FIT3173)",
+    body: [
+      { heading: "Web Exploitation", text: "Mastered the identification and exploitation of OWASP Top 10 vulnerabilities, including SQL Injection (SQLi), Cross-Site Scripting (XSS), and Cross-Site Request Forgery (CSRF)." },
+      { heading: "Memory Corruption", text: "Executed Buffer Overflow attacks to understand low-level memory management and the mechanics of remote code execution (RCE)." },
+      { heading: "Intercept & Audit", text: "Utilized Burp Suite Professional for intercepting HTTP traffic, performing manual security audits, and testing web application logic." },
+      { heading: "Threat Modeling", text: "Developed comprehensive threat models to identify potential software weaknesses and designed mitigation strategies for concurrent and networked applications." },
+    ],
+  },
+];
+---
+
+<Layout title="Projects — Moe Htet Kyaw">
+  <!-- Subtle blueprint grid backdrop -->
+  <div
+    class="fixed inset-0 -z-10 opacity-[0.04] pointer-events-none"
+    style="background-image: linear-gradient(rgba(0, 209, 255, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 209, 255, 0.4) 1px, transparent 1px); background-size: 56px 56px;"
+  ></div>
+
+  <!-- ═══ Operations & Deployments ═══ -->
+  <section class="px-8 pt-28 pb-16">
+    <div class="mx-auto max-w-7xl">
+      <div class="flex flex-wrap items-end justify-between gap-6 mb-12">
+        <div data-reveal>
+          <h1 class="font-display font-bold text-4xl md:text-5xl text-on-surface">Operations &amp; Deployments</h1>
+          <p class="mt-3 text-on-surface-variant max-w-2xl">
+            A curated gallery of high-stakes infrastructure, penetration testing simulations, and scalable web architectures.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2" data-filters>
+          <button data-filter="all" class="filter-btn px-4 py-2 rounded text-xs font-medium bg-primary-container text-on-primary">All</button>
+          <button data-filter="cybersecurity" class="filter-btn px-4 py-2 rounded text-xs font-medium bg-surface-container border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition">Cybersecurity</button>
+          <button data-filter="web" class="filter-btn px-4 py-2 rounded text-xs font-medium bg-surface-container border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition">Web Dev</button>
+        </div>
+      </div>
+
+      <!-- Operations grid -->
+      <div class="grid md:grid-cols-2 gap-5">
+        {operations.map((p) => (
+          <article
+            class="glass glass-interactive rounded-md overflow-hidden flex flex-col group hover:glow-primary transition-all duration-300 tilt"
+            data-category={p.category.label.toLowerCase().includes("web") ? "web" : "cybersecurity"}
+            data-reveal
+          >
+            <div class="flex flex-col h-full">
+              <!-- Image -->
+              <div class="relative overflow-hidden w-full h-44 bg-surface-container-low">
+                <img src={p.image} alt={p.title} class="w-full h-full object-cover" loading="lazy" />
+                <!-- Tags overlay -->
+                <div class="absolute top-3 left-3 right-3 flex flex-wrap gap-1.5">
+                  {p.tags.map((t) => (
+                    <span class="font-mono text-[10px] px-2 py-1 rounded bg-background/70 border border-outline-variant/40 text-on-surface backdrop-blur-sm">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="flex-1 p-6 flex flex-col">
+                <div class="flex items-center gap-2 text-primary-container mb-3">
+                  {p.category.icon === "server" && (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>
+                  )}
+                  {p.category.icon === "code" && (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                  )}
+                  {p.category.icon === "shield" && (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.94 8.94a1 1 0 0 1-.12 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+                  )}
+                  <span class="mono-label text-[11px]">{p.category.label}</span>
+                </div>
+
+                <h3 class="font-display font-semibold text-xl text-on-surface mb-3 group-hover:text-primary-container transition-colors">
+                  {p.title}
+                </h3>
+                <ul class="flex-1 space-y-2 text-sm text-on-surface-variant leading-relaxed">
+                  {p.bullets.map((b) => (
+                    <li class="flex items-start gap-2">
+                      <span class="mt-1.5 block h-1 w-1 rounded-full bg-primary-container shrink-0"></span>
+                      <span>
+                        {typeof b === "string" ? b : (
+                          <><strong class="text-on-surface font-medium">{b.label}:</strong> {b.text}</>
+                        )}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {p.cta && (
+                  <a href={p.cta.href} target={p.cta.target} rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 mono-label text-primary-container hover:brightness-125 transition w-fit">
+                    {p.cta.label}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+
+        <!-- Team / freelance projects (bullet-list cards) -->
+        {teamProjects.map((p) => (
+          <article class="glass glass-interactive rounded-md p-6 tilt" data-category="cybersecurity web" data-reveal>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              {p.tags.map((t) => (
+                <span class="font-mono text-[10px] px-2 py-1 rounded bg-surface-container-high text-on-surface-variant">
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            {p.date && (
+              <div class="flex items-center gap-2 text-on-surface-variant mb-3 text-xs font-mono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+                <span>{p.date}</span>
+              </div>
+            )}
+
+            <div class="flex items-center gap-2 text-primary-container mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.94 8.94a1 1 0 0 1-.12 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+              <span class="mono-label text-[11px]">{p.category.label}</span>
+            </div>
+
+            <h3 class="font-display font-semibold text-xl text-on-surface mb-1.5">{p.title}</h3>
+            <p class="text-primary-container/90 text-sm mb-4">{p.role}</p>
+
+            <ul class="space-y-2 mb-5 text-sm text-on-surface">
+              {p.bullets.map((b) => (
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-1.5 block h-1 w-1 rounded-full bg-primary-container shrink-0"></span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a href={p.cta.href} target={p.cta.target} rel="noopener noreferrer" class="inline-flex items-center gap-2 mono-label text-primary-container hover:brightness-125 transition w-fit">
+              {p.cta.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Uni project ═══ -->
+  <section class="px-8 py-16">
+    <div class="mx-auto max-w-7xl">
+      <h2 class="font-display font-bold text-3xl text-on-surface mb-2">Uni project</h2>
+      <p class="text-on-surface-variant text-sm mb-10">
+        //Selected Monash University projects/assignmnet demonstrating my technical readiness as a Cybersecurity graduate.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        {uniProjects.map((card, i) => (
+          <article class="glass glass-interactive rounded-md p-6 font-mono text-code tilt" data-reveal data-delay={String(i + 1)}>
+            <div class="flex items-center justify-between mb-5">
+              <div class="h-10 w-10 rounded glass flex items-center justify-center text-primary-container">
+                {card.icon === "globe" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                )}
+                {card.icon === "key" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+                )}
+                {card.icon === "bug" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3 3 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.8 3.8-4"/><path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.2 3.8 1.9 3.8 4"/></svg>
+                )}
+              </div>
+              <span class="block h-1.5 w-1.5 rounded-full bg-secondary-container pulse-secure"></span>
+            </div>
+
+            <h3 class="font-display font-semibold text-lg text-on-surface mb-4">{card.title}</h3>
+
+            <div class="space-y-3 text-on-surface-variant leading-relaxed">
+              {card.body.map((row) => (
+                <p>
+                  <span class="text-on-surface font-medium">{row.heading}:</span> {row.text}
+                </p>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll("article[data-category]");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.getAttribute("data-filter");
+
+        buttons.forEach((b) => {
+          b.classList.remove("bg-primary-container", "text-on-primary");
+          b.classList.add("bg-surface-container", "border", "border-outline-variant/50", "text-on-surface");
+        });
+        btn.classList.add("bg-primary-container", "text-on-primary");
+        btn.classList.remove("bg-surface-container", "border", "border-outline-variant/50", "text-on-surface");
+
+        cards.forEach((c) => {
+          const cat = c.getAttribute("data-category") || "";
+          c.style.display = filter === "all" || cat.split(" ").includes(filter) ? "" : "none";
+        });
+      });
+    });
+  });
+</script>

@@ -1,0 +1,202 @@
+---
+// "More About Me" section — matches updated home page design
+---
+
+<section class="relative px-8 py-24">
+  <div class="mx-auto max-w-7xl space-y-5">
+
+    <!-- Section header -->
+    <header class="flex items-center gap-3 mb-3" data-reveal>
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-container" aria-hidden="true">
+        <rect width="7" height="7" x="3" y="3" rx="1"/>
+        <rect width="7" height="7" x="14" y="3" rx="1"/>
+        <rect width="7" height="7" x="14" y="14" rx="1"/>
+        <rect width="7" height="7" x="3" y="14" rx="1"/>
+      </svg>
+      <h2 class="font-display font-semibold text-3xl text-on-surface">More About Me</h2>
+    </header>
+
+    <!-- ── Card 1: identity.json terminal ── -->
+    <article class="glass glass-interactive rounded-md overflow-hidden" data-reveal data-delay="1">
+      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-outline-variant/40">
+        <span class="block h-2.5 w-2.5 rounded-full" style="background:#ff6b6b;"></span>
+        <span class="block h-2.5 w-2.5 rounded-full" style="background:#feb127;"></span>
+        <span class="block h-2.5 w-2.5 rounded-full" style="background:#4cd6ff;"></span>
+        <span class="ml-2 mono-label text-primary-container text-[11px]">[ IDENTITY.JSON ]</span>
+      </div>
+
+      <pre
+        id="identity-terminal"
+        class="px-6 py-5 font-mono text-[13px] leading-relaxed text-on-surface min-h-[220px] overflow-x-auto"
+      ><span id="identity-cursor" class="inline-block w-[9px] h-[1em] align-middle bg-primary-container" style="animation: blink-cursor 1s step-end infinite;"></span></pre>
+    </article>
+
+    <!-- ── Card 2: Skills ── -->
+    <article class="glass glass-interactive rounded-md p-6" data-reveal data-delay="2">
+      <div class="pb-4 mb-5 border-b border-outline-variant/40">
+        <span class="mono-label text-primary-container">[ SKILLS ]</span>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 font-mono text-[13px]">
+        <div>
+          <p class="mono-label text-on-surface-variant mb-3 text-[11px]">SECURITY</p>
+          <p class="text-on-surface leading-relaxed">
+            Vulnerability Assessment, Digital Forensics, Network Security, Software Security, Hardware Security
+          </p>
+        </div>
+        <div>
+          <p class="mono-label text-on-surface-variant mb-3 text-[11px]">DEVELOPMENT</p>
+          <p class="text-on-surface leading-relaxed">
+            Python, Java, JS, PHP, CakePHP, Hosting, APIs
+          </p>
+        </div>
+        <div>
+          <p class="mono-label text-on-surface-variant mb-3 text-[11px]">TOOLS</p>
+          <p class="text-on-surface leading-relaxed">
+            BurpSuite, Nmap, Wireshark, Operating Systems (<strong class="text-primary-container font-semibold">Kali</strong>, <strong class="text-primary-container font-semibold">Debian</strong>, <strong class="text-primary-container font-semibold">Ubuntu</strong>, <strong class="text-primary-container font-semibold">Arch</strong>, and <strong class="text-primary-container font-semibold">Endeavour OS</strong>), Git, etc
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Card 3: Active Projects ── -->
+    <article class="glass glass-interactive rounded-md p-6" data-reveal data-delay="3">
+      <div class="pb-4 mb-5 border-b border-outline-variant/40">
+        <span class="mono-label text-primary-container">[ ACTIVE_PROJECTS ]</span>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="glass rounded p-4">
+          <p class="mono-label text-on-surface-variant text-[10px] mb-2">PROJECT_01</p>
+          <h3 class="font-display font-semibold text-base text-on-surface mb-2">Automated Vulnerability Scanner</h3>
+          <p class="text-sm text-on-surface-variant leading-relaxed">
+            Custom Python tool integrating Nmap and Nikto APIs for automated perimeter assessment.
+          </p>
+        </div>
+        <div class="glass rounded p-4">
+          <p class="mono-label text-on-surface-variant text-[10px] mb-2">PROJECT_02</p>
+          <h3 class="font-display font-semibold text-base text-on-surface mb-2">Secure NAS Implementation</h3>
+          <p class="text-sm text-on-surface-variant leading-relaxed">
+            Highly secure storage infrastructure with encrypted volumes and automated backup protocols.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded border border-primary-container text-primary-container text-sm font-medium hover:bg-primary-container/10 hover:glow-primary transition-all duration-300"
+        >
+          View all projects
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<style>
+  @keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+</style>
+
+<script>
+  const terminal = document.getElementById("identity-terminal");
+  const cursor   = document.getElementById("identity-cursor");
+
+  if (terminal && cursor) {
+    // Lines: [plain text for typing, colored HTML to swap in when line is done]
+    const lines: [string, string][] = [
+      [
+        "root@dev-env:~$ cat identity.json",
+        '<span style="color:#00d1ff">root@dev-env</span><span style="color:#859399">:~$</span> cat identity.json',
+      ],
+      ["{", "{"],
+      [
+        '  "Name": "Moe Htet Kyaw",',
+        '  <span style="color:#4cd6ff">"Name"</span>: <span style="color:#dde3e7">"Moe Htet Kyaw"</span>,',
+      ],
+      [
+        '  "Education": "Bachelor of Information Technology (Cybersecurity)",',
+        '  <span style="color:#4cd6ff">"Education"</span>: <span style="color:#dde3e7">"Bachelor of Information Technology (Cybersecurity)"</span>,',
+      ],
+      [
+        '  "University": "Monash University",',
+        '  <span style="color:#4cd6ff">"University"</span>: <span style="color:#dde3e7">"Monash University"</span>,',
+      ],
+      [
+        '  "Graduation": "December 2025",',
+        '  <span style="color:#4cd6ff">"Graduation"</span>: <span style="color:#dde3e7">"December 2025"</span>,',
+      ],
+      [
+        '  "Status": "Seeking Entry-level Role",',
+        '  <span style="color:#4cd6ff">"Status"</span>: <span style="color:#dde3e7">"Seeking Entry-level Role"</span>,',
+      ],
+      [
+        '  "Location": "Melbourne, VIC"',
+        '  <span style="color:#4cd6ff">"Location"</span>: <span style="color:#dde3e7">"Melbourne, VIC"</span>',
+      ],
+      ["}", "}"],
+      [
+        "root@dev-env:~$ ",
+        '<span style="color:#00d1ff">root@dev-env</span><span style="color:#859399">:~$</span> ',
+      ],
+    ];
+
+    // Clear terminal, keep cursor
+    terminal.textContent = "";
+    terminal.appendChild(cursor);
+
+    let lineIdx = 0;
+    let charIdx = 0;
+    let currentSpan: HTMLSpanElement | null = null;
+
+    function typeChar() {
+      if (lineIdx >= lines.length) return;
+      const [raw, html] = lines[lineIdx];
+
+      // Start a new line span if needed
+      if (charIdx === 0) {
+        currentSpan = document.createElement("span");
+        terminal.insertBefore(currentSpan, cursor);
+      }
+
+      if (charIdx < raw.length) {
+        currentSpan!.textContent += raw[charIdx];
+        charIdx++;
+        setTimeout(typeChar, 22 + Math.random() * 18);
+      } else {
+        // Line done — swap to colored HTML
+        currentSpan!.innerHTML = html;
+        currentSpan = null;
+
+        // Add newline (except after last line)
+        if (lineIdx < lines.length - 1) {
+          terminal.insertBefore(document.createTextNode("\n"), cursor);
+        }
+
+        lineIdx++;
+        charIdx = 0;
+        if (lineIdx < lines.length) {
+          // Short pause between lines (longer after opening line)
+          const pause = lineIdx === 1 ? 120 : 40;
+          setTimeout(typeChar, pause);
+        }
+      }
+    }
+
+    // Start when terminal scrolls into view
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          obs.disconnect();
+          setTimeout(typeChar, 350);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    obs.observe(terminal);
+  }
+</script>

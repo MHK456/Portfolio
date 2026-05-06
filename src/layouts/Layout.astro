@@ -1,0 +1,201 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Moe Htet Kyaw — Cybersecurity Portfolio",
+  description = "Cybersecurity & web development portfolio.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/fav-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+    <title>{title}</title>
+  </head>
+  <body class="text-on-background">
+
+    <!-- ── Animated background blobs ── -->
+    <div aria-hidden="true">
+      <div class="bg-blob bg-blob-a"></div>
+      <div class="bg-blob bg-blob-b"></div>
+      <div class="bg-blob bg-blob-c"></div>
+    </div>
+
+    <!-- ── Custom cursor ── -->
+    <div id="cursor-dot"  aria-hidden="true"></div>
+    <div id="cursor-ring" aria-hidden="true"></div>
+    <div id="cursor-glow" aria-hidden="true"></div>
+
+    <Nav />
+    <main class="relative z-10">
+      <slot />
+    </main>
+    <Footer />
+
+  </body>
+</html>
+
+<script is:inline>
+/* ================================================================
+   Global interactive scripts — cursor, scroll reveal, card tilt
+   ================================================================ */
+(function () {
+  /* ── 1. Custom cursor (dot + ring + glow with lerp) ──────────── */
+  const dot  = document.getElementById("cursor-dot");
+  const ring = document.getElementById("cursor-ring");
+  const glow = document.getElementById("cursor-glow");
+
+  let mx = -500, my = -500;
+  let rx = -500, ry = -500;   // ring lerp
+  let gx = -500, gy = -500;   // glow lerp
+
+  document.addEventListener("mousemove", (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+  });
+
+  // Scale cursor on interactive elements
+  document.addEventListener("mouseover", (e) => {
+    if (e.target.closest("a, button, [role='button'], input, textarea")) {
+      dot.style.width  = "14px";
+      dot.style.height = "14px";
+      ring.style.width  = "54px";
+      ring.style.height = "54px";
+      ring.style.borderColor = "rgba(0, 209, 255, 0.9)";
+    }
+  });
+  document.addEventListener("mouseout", (e) => {
+    if (e.target.closest("a, button, [role='button'], input, textarea")) {
+      dot.style.width  = "8px";
+      dot.style.height = "8px";
+      ring.style.width  = "36px";
+      ring.style.height = "36px";
+      ring.style.borderColor = "rgba(0, 209, 255, 0.5)";
+    }
+  });
+
+  // Hide cursor when it leaves the window
+  document.addEventListener("mouseleave", () => {
+    dot.style.opacity  = "0";
+    ring.style.opacity = "0";
+    glow.style.opacity = "0";
+  });
+  document.addEventListener("mouseenter", () => {
+    dot.style.opacity  = "1";
+    ring.style.opacity = "1";
+    glow.style.opacity = "1";
+  });
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function animateCursor() {
+    // Dot: snap directly
+    dot.style.left = mx + "px";
+    dot.style.top  = my + "px";
+
+    // Ring: slight lag
+    rx = lerp(rx, mx, 0.12);
+    ry = lerp(ry, my, 0.12);
+    ring.style.left = rx + "px";
+    ring.style.top  = ry + "px";
+
+    // Glow: even more lag + bigger
+    gx = lerp(gx, mx, 0.06);
+    gy = lerp(gy, my, 0.06);
+    glow.style.left = gx + "px";
+    glow.style.top  = gy + "px";
+
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  /* ── 2. Scroll reveal ────────────────────────────────────────── */
+  const revealObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in-view");
+          revealObs.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll("[data-reveal]").forEach((el) => {
+    revealObs.observe(el);
+  });
+
+  /* ── 3. Progress bars — animate to data-percent on enter ─────── */
+  const barObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const pct = e.target.getAttribute("data-percent") || "0";
+          e.target.style.width = pct + "%";
+          barObs.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+  document.querySelectorAll(".progress-bar-fill").forEach((el) => {
+    barObs.observe(el);
+  });
+
+  /* ── 4. Card 3D tilt ─────────────────────────────────────────── */
+  const supportsHover = window.matchMedia("(hover: hover)").matches;
+  if (supportsHover) {
+    document.querySelectorAll(".tilt").forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const r   = card.getBoundingClientRect();
+        const x   = ((e.clientX - r.left) / r.width  - 0.5) * 10;
+        const y   = ((e.clientY - r.top)  / r.height - 0.5) * 10;
+        card.style.transform = `perspective(900px) rotateY(${x}deg) rotateX(${-y}deg) translateZ(4px)`;
+        card.style.boxShadow = `${-x * 1.5}px ${y * 1.5}px 30px rgba(0, 209, 255, 0.12)`;
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+        card.style.boxShadow = "";
+      });
+    });
+  }
+
+  /* ── 5. Hero name typeout — data-typeout attr ────────────────── */
+  const nameEl   = document.getElementById("hero-name");
+  const nameCursor = document.getElementById("hero-name-cursor");
+  if (nameEl) {
+    const text = nameEl.getAttribute("data-typeout") || "";
+    nameEl.textContent = "";
+    let i = 0;
+    // Start after the h1 data-reveal delay (≈500ms) + small buffer
+    setTimeout(function typeName() {
+      if (i < text.length) {
+        nameEl.textContent += text[i];
+        i++;
+        setTimeout(typeName, 70 + Math.random() * 40);
+      } else {
+        // Typing done — hide cursor after a short pause
+        setTimeout(() => {
+          if (nameCursor) nameCursor.style.display = "none";
+        }, 800);
+      }
+    }, 900);
+  }
+
+})();
+</script>

@@ -1,9 +1,9 @@
-# Moe H. Kyaw - Cybersecurity Portfolio
+# Moe Htet Kyaw - Cybersecurity Portfolio
 
 Live Website: [https://moehkyawprotfolio.vercel.app/](https://moehkyawprotfolio.vercel.app/)
 
 ## Description
-This is the personal portfolio website of Moe H. Kyaw, a Cybersecurity graduate from Monash University. The website showcases hands-on experience in network security, authentication systems, Linux-based infrastructure, and various home-lab security projects (such as NAS infrastructure, automated vulnerability scanning tools, and RFID security testing environments). 
+This is the personal portfolio website for myself, a Cybersecurity graduate from Monash University. The website showcases hands-on experience in network security, authentication systems, Linux-based infrastructure, and various home-lab security projects (such as NAS infrastructure, automated vulnerability scanning tools, and RFID security testing environments). 
 
 Built with [Astro](https://astro.build/) for a fast, minimal, and modern web experience.
 

@@ -1,29 +1,26 @@
-# Astro Starter Kit: Minimal
+# Moe H. Kyaw - Cybersecurity Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Live Website: [https://moehkyawprotfolio.vercel.app/](https://moehkyawprotfolio.vercel.app/)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Description
+This is the personal portfolio website of Moe H. Kyaw, a Cybersecurity graduate from Monash University. The website showcases hands-on experience in network security, authentication systems, Linux-based infrastructure, and various home-lab security projects (such as NAS infrastructure, automated vulnerability scanning tools, and RFID security testing environments). 
+
+Built with [Astro](https://astro.build/) for a fast, minimal, and modern web experience.
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+Inside of this Astro project, you'll see the following folders and files:
 
 ```text
 /
 ├── public/
 ├── src/
+│   ├── components/
+│   ├── sections/
 │   └── pages/
 │       └── index.astro
 └── package.json
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
 
 ## 🧞 Commands
 
@@ -35,9 +32,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
